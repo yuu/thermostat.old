@@ -18,4 +18,16 @@ var _ = Resource("operands", func() {
 		Description("Get any thermostat info")
 		Response(OK, "application/json")
 	})
+
+	Action("targetHeatingCoolingState", func() {
+		Routing(GET("targetHeatingCoolingState/:value"))
+		Description("Set target HeatingCoolingState")
+		Params(func() {
+			Param("value", Integer, "value operand", func() {
+				Minimum(0)
+				Maximum(3)
+			})
+		})
+		Response(OK, "application/json")
+	})
 })
