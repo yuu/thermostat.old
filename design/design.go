@@ -27,6 +27,7 @@ var _ = Resource("operands", func() {
 				Minimum(0)
 				Maximum(3)
 			})
+			Required("value")
 		})
 		Response(OK, "application/json")
 	})
@@ -39,6 +40,7 @@ var _ = Resource("operands", func() {
 				Minimum(16)
 				Maximum(31)
 			})
+			Required("value")
 		})
 		Response(OK, "application/json")
 	})
@@ -48,6 +50,7 @@ var _ = Resource("operands", func() {
 		Description("Set target relative humidity")
 		Params(func() {
 			Param("value", Integer, "value operand")
+			Required("value")
 		})
 	})
 })
