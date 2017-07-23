@@ -30,4 +30,16 @@ var _ = Resource("operands", func() {
 		})
 		Response(OK, "application/json")
 	})
+
+	Action("targetTemperature", func() {
+		Routing(GET("targetTemperature/:value"))
+		Description("Set target temperature")
+		Params(func() {
+			Param("value", Float, "value operand", func() {
+				Minimum(16.0)
+				Maximum(31.0)
+			})
+		})
+		Response(OK, "application/json")
+	})
 })
