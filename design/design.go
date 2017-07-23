@@ -29,7 +29,7 @@ var _ = Resource("operands", func() {
 			})
 			Required("value")
 		})
-		Response(OK, "application/json")
+		Response(OK)
 	})
 
 	Action("targetTemperature", func() {
@@ -42,7 +42,7 @@ var _ = Resource("operands", func() {
 			})
 			Required("value")
 		})
-		Response(OK, "application/json")
+		Response(OK)
 	})
 
 	Action("targetRelativeHumidity", func() {
@@ -52,6 +52,7 @@ var _ = Resource("operands", func() {
 			Param("value", Integer, "value operand")
 			Required("value")
 		})
+		Response(OK)
 	})
 })
 
