@@ -16,7 +16,7 @@ var _ = Resource("operands", func() {
 	Action("status", func() {
 		Routing(GET("status"))
 		Description("Get any thermostat info")
-		Response(OK, "application/json")
+		Response(OK, StatusMedia)
 	})
 
 	Action("targetHeatingCoolingState", func() {
@@ -52,5 +52,25 @@ var _ = Resource("operands", func() {
 			Param("value", Integer, "value operand")
 			Required("value")
 		})
+	})
+})
+
+var StatusMedia = MediaType("application/json", func() {
+	Description("any thermostat info")
+	Attributes(func() {
+		Attribute("targetHeatingCoolingState", Integer, "")
+		Attribute("targetTemperature", Integer, "")
+		Attribute("targetRelativeHumidity", Integer, "")
+		Attribute("currentHeatingCoolingState", Integer, "")
+		Attribute("currentTemperature", Integer, "")
+		Attribute("currentRelativeHumidity", Integer, "")
+	})
+	View("default", func() {
+		Attribute("targetHeatingCoolingState")
+		Attribute("targetTemperature")
+		Attribute("targetRelativeHumidity")
+		Attribute("currentHeatingCoolingState")
+		Attribute("currentTemperature")
+		Attribute("currentRelativeHumidity")
 	})
 })
