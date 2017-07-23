@@ -65,6 +65,13 @@ var StatusMedia = MediaType("application/json", func() {
 		Attribute("currentHeatingCoolingState", Integer, "")
 		Attribute("currentTemperature", Integer, "")
 		Attribute("currentRelativeHumidity", Integer, "")
+
+		Required("targetHeatingCoolingState",
+			"targetTemperature",
+			"targetRelativeHumidity",
+			"currentHeatingCoolingState",
+			"currentTemperature",
+			"currentRelativeHumidity")
 	})
 	View("default", func() {
 		Attribute("targetHeatingCoolingState")
