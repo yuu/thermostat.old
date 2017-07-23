@@ -42,4 +42,12 @@ var _ = Resource("operands", func() {
 		})
 		Response(OK, "application/json")
 	})
+
+	Action("targetRelativeHumidity", func() {
+		Routing(GET("targetRelativeHumidity/:value"))
+		Description("Set target relative humidity")
+		Params(func() {
+			Param("value", Integer, "value operand")
+		})
+	})
 })
