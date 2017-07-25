@@ -20,6 +20,8 @@ var status = Status{
 func main() {
 	ir, _ := CreateIR()
 	ir.OpenDevice()
+	ir.Write(Asset("modeHum"))
+	return
 
 	// Create service
 	service := goa.New("thermostat")
