@@ -89,6 +89,7 @@ func (c *OperandsController) TargetRelativeHumidity(ctx *app.TargetRelativeHumid
 	// OperandsController_TargetRelativeHumidity: start_implement
 
 	// Put your logic here
+	fmt.Println("not implment")
 
 	// OperandsController_TargetRelativeHumidity: end_implement
 	return nil
@@ -99,6 +100,7 @@ func (c *OperandsController) TargetTemperature(ctx *app.TargetTemperatureOperand
 	// OperandsController_TargetTemperature: start_implement
 
 	// Put your logic here
+	// TODO: change target AC temperature
 
 	// OperandsController_TargetTemperature: end_implement
 	return nil
