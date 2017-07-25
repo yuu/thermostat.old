@@ -1,4 +1,4 @@
-//go:generate go-bindata -prefix ir-data ./ir-data
+//go:generate go-bindata -nocompress -prefix ir-data ./ir-data
 
 package main
 
