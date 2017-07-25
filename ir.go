@@ -1,3 +1,5 @@
+//go:generate go-bindata -nocompress -prefix ir-data ./ir-data
+
 package main
 
 import . "github.com/deadsy/libusb"

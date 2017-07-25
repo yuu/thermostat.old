@@ -5,6 +5,13 @@ import (
 	"thermostat/app"
 )
 
+const (
+	MODE_OFF  = 0
+	MODE_HEAT = 1
+	MODE_COOL = 2
+	MODE_AUTO = 3
+)
+
 type Status struct {
 	CurrentHeatingCoolingState int
 	CurrentRelativeHumidity    int
@@ -49,6 +56,29 @@ func (c *OperandsController) TargetHeatingCoolingState(ctx *app.TargetHeatingCoo
 	// OperandsController_TargetHeatingCoolingState: start_implement
 
 	// Put your logic here
+	var need_boot bool = c.status.CurrentHeatingCoolingState == MODE_OFF
+	var mode []byte
+	switch ctx.Value {
+	case MODE_OFF:
+		mode, _ = Asset("off")
+	case MODE_HEAT:
+		mode, _ = Asset("modeHeat")
+	case MODE_COOL:
+		mode, _ = Asset("modeCool")
+	case MODE_AUTO:
+		mode, _ = Asset("modeHum")
+	default:
+		return fmt.Errorf("not supported")
+	}
+
+	if need_boot {
+		on, _ := Asset("on")
+		c.ir.Write(IR_FREQ_DEFAULT, on)
+	}
+
+	c.ir.Write(IR_FREQ_DEFAULT, mode)
+	c.status.CurrentHeatingCoolingState = ctx.Value
+	c.status.TargetHeatingCoolingState = ctx.Value
 
 	// OperandsController_TargetHeatingCoolingState: end_implement
 	return nil
