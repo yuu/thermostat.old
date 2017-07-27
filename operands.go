@@ -63,11 +63,11 @@ func (c *OperandsController) TargetHeatingCoolingState(ctx *app.TargetHeatingCoo
 	case MODE_OFF:
 		mode, _ = Asset("off")
 	case MODE_HEAT:
-		mode, _ = Asset("modeHeat")
+		mode, _ = modeHeatBytes()
 	case MODE_COOL:
-		mode, _ = Asset("modeCool")
+		mode, _ = modeCoolBytes()
 	case MODE_AUTO:
-		mode, _ = Asset("modeHum")
+		mode, _ = modeHumidityBytes()
 	default:
 		return fmt.Errorf("not supported")
 	}
