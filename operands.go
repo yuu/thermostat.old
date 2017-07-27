@@ -62,12 +62,16 @@ func (c *OperandsController) TargetHeatingCoolingState(ctx *app.TargetHeatingCoo
 	switch ctx.Value {
 	case MODE_OFF:
 		mode, _ = Asset("off")
+		c.status.CurrentHeatingCoolingState = 0
 	case MODE_HEAT:
 		mode, _ = modeHeatBytes()
+		c.status.CurrentHeatingCoolingState = 1
 	case MODE_COOL:
 		mode, _ = modeCoolBytes()
+		c.status.CurrentHeatingCoolingState = 2
 	case MODE_AUTO:
 		mode, _ = modeHumidityBytes()
+		c.status.CurrentHeatingCoolingState = 2
 	default:
 		return fmt.Errorf("not supported")
 	}
@@ -78,7 +82,6 @@ func (c *OperandsController) TargetHeatingCoolingState(ctx *app.TargetHeatingCoo
 	}
 
 	c.ir.Write(IR_FREQ_DEFAULT, mode)
-	c.status.CurrentHeatingCoolingState = ctx.Value
 	c.status.TargetHeatingCoolingState = ctx.Value
 
 	// OperandsController_TargetHeatingCoolingState: end_implement
