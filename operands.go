@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/goadesign/goa"
 	"thermostat/app"
+	"fmt"
 )
 
 const (
