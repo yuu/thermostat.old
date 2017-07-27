@@ -81,8 +81,8 @@ func (i *IR) Write(freq uint64, data []byte) error {
 	send_bit_num := (data_count / 4) + ((data_count % 4) / 2)
 
 	if (i.DH == nil) &&
-		(freq < IR_FREQ_MIN && IR_FREQ_MAX < freq) &&
-		(send_bit_num < 1) &&
+		(freq < IR_FREQ_MIN && IR_FREQ_MAX < freq) ||
+		(send_bit_num < 1) ||
 		(IR_SEND_DATA_MAX_LEN_K < send_bit_num) {
 		return fmt.Errorf("invalid argument")
 	}
