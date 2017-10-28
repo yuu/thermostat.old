@@ -4,10 +4,10 @@ import (
 	"fmt"
 	goaclient "github.com/goadesign/goa/client"
 	"github.com/spf13/cobra"
+	"github.com/yuu/thermostat/client"
+	"github.com/yuu/thermostat/tool/cli"
 	"net/http"
 	"os"
-	"thermostat/client"
-	"thermostat/tool/cli"
 	"time"
 )
 

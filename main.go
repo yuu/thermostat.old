@@ -5,7 +5,7 @@ package main
 import (
 	"github.com/goadesign/goa"
 	"github.com/goadesign/goa/middleware"
-	"thermostat/app"
+	"github.com/yuu/thermostat/app"
 )
 
 var status = Status{

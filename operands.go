@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/goadesign/goa"
-	"thermostat/app"
+	"github.com/yuu/thermostat/app"
 	"fmt"
 )
 
