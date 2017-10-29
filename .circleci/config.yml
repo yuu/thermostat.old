@@ -20,6 +20,7 @@ jobs:
 
       - store_artifacts:
           path: thermostat
+          when: on_success
 
       - save_cache:
           key: go-get
