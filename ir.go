@@ -2,7 +2,7 @@
 
 package main
 
-import . "github.com/deadsy/libusb"
+import . "github.com/yuu/libusb"
 import "fmt"
 
 // USB IR remocon ADVANCE
