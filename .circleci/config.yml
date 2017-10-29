@@ -28,6 +28,6 @@ jobs:
 
 workflows:
   version: 2
-  commit:
+  myworkflow:
     jobs:
       - build:
