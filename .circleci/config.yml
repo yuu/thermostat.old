@@ -28,7 +28,7 @@ jobs:
 
 notify:
   webhooks:
-    - url: #{HUBOT_WEBHOOK_URL}/hubot/deployment/circleci
+    - url: ${HUBOT_WEBHOOK_URL}/hubot/deployment/circleci
 
 workflows:
   version: 2
