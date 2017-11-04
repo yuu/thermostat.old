@@ -26,6 +26,10 @@ jobs:
           paths:
             - /go
 
+notify:
+  webhooks:
+    - url: #{HUBOT_WEBHOOK_URL}/hubot/deployment/circleci
+
 workflows:
   version: 2
   myworkflow:
