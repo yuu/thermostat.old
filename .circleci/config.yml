@@ -34,4 +34,5 @@ workflows:
 
 notify:
   webhooks:
-    - url: $GITHUB_WEBHOOK_URL
+    - url: https://my.webhookrelay.com/v1/webhooks/ae18b941-617b-4266-a649-661284364921
+
