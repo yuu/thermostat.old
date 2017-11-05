@@ -31,3 +31,7 @@ workflows:
   myworkflow:
     jobs:
       - build:
+
+notify:
+  webhooks:
+    - url: $GITHUB_WEBHOOK_URL
