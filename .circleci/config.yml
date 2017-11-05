@@ -26,12 +26,6 @@ jobs:
           paths:
             - /go
 
-workflows:
-  version: 2
-  myworkflow:
-    jobs:
-      - build:
-
 notify:
   webhooks:
     - url: https://my.webhookrelay.com/v1/webhooks/ae18b941-617b-4266-a649-661284364921
