@@ -1,0 +1,144 @@
+consumes:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+definitions:
+  Json:
+    description: any thermostat info (default view)
+    example:
+      currentHeatingCoolingState: 3.6364362e+18
+      currentRelativeHumidity: 1.7802656e+18
+      currentTemperature: 6.633115e+17
+      targetHeatingCoolingState: 3.371724e+18
+      targetRelativeHumidity: 7.976139e+18
+      targetTemperature: 2.1733712e+18
+    properties:
+      currentHeatingCoolingState:
+        example: 3.6364362e+18
+        format: int64
+        type: integer
+      currentRelativeHumidity:
+        example: 1.7802656e+18
+        format: int64
+        type: integer
+      currentTemperature:
+        example: 6.633115e+17
+        format: int64
+        type: integer
+      targetHeatingCoolingState:
+        example: 3.371724e+18
+        format: int64
+        type: integer
+      targetRelativeHumidity:
+        example: 7.976139e+18
+        format: int64
+        type: integer
+      targetTemperature:
+        example: 2.1733712e+18
+        format: int64
+        type: integer
+    required:
+    - targetHeatingCoolingState
+    - targetTemperature
+    - targetRelativeHumidity
+    - currentHeatingCoolingState
+    - currentTemperature
+    - currentRelativeHumidity
+    title: 'Mediatype identifier: application/json; view=default'
+    type: object
+host: localhost:9999
+info:
+  description: Controll IR
+  title: The thermostat API
+  version: ""
+paths:
+  /status:
+    get:
+      description: Get any thermostat info
+      operationId: operands#status
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Json'
+      schemes:
+      - http
+      summary: status operands
+      tags:
+      - operands
+  /targetHeatingCoolingState/{value}:
+    get:
+      description: Set target HeatingCoolingState
+      operationId: operands#targetHeatingCoolingState
+      parameters:
+      - description: value operand
+        in: path
+        maximum: 3
+        minimum: 0
+        name: value
+        required: true
+        type: integer
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: OK
+      schemes:
+      - http
+      summary: targetHeatingCoolingState operands
+      tags:
+      - operands
+  /targetRelativeHumidity/{value}:
+    get:
+      description: Set target relative humidity
+      operationId: operands#targetRelativeHumidity
+      parameters:
+      - description: value operand
+        in: path
+        name: value
+        required: true
+        type: integer
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: OK
+      schemes:
+      - http
+      summary: targetRelativeHumidity operands
+      tags:
+      - operands
+  /targetTemperature/{value}:
+    get:
+      description: Set target temperature
+      operationId: operands#targetTemperature
+      parameters:
+      - description: value operand
+        in: path
+        maximum: 31
+        minimum: 16
+        name: value
+        required: true
+        type: integer
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: OK
+      schemes:
+      - http
+      summary: targetTemperature operands
+      tags:
+      - operands
+produces:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+responses:
+  OK:
+    description: OK
+schemes:
+- http
+swagger: "2.0"
