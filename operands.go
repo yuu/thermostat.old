@@ -37,9 +37,6 @@ func NewOperandsController(service *goa.Service, s Status, i IR) *OperandsContro
 
 // Status runs the status action.
 func (c *OperandsController) Status(ctx *app.StatusOperandsContext) error {
-	// OperandsController_Status: start_implement
-
-	// Put your logic here
 	res := &app.JSON{
 		CurrentHeatingCoolingState: c.status.CurrentHeatingCoolingState,
 		CurrentRelativeHumidity:    c.status.CurrentRelativeHumidity,
@@ -49,15 +46,11 @@ func (c *OperandsController) Status(ctx *app.StatusOperandsContext) error {
 		TargetTemperature:          c.status.TargetTemperature,
 	}
 
-	// OperandsController_Status: end_implement
 	return ctx.OK(res)
 }
 
 // TargetHeatingCoolingState runs the targetHeatingCoolingState action.
 func (c *OperandsController) TargetHeatingCoolingState(ctx *app.TargetHeatingCoolingStateOperandsContext) error {
-	// OperandsController_TargetHeatingCoolingState: start_implement
-
-	// Put your logic here
 	var need_boot bool = c.status.CurrentHeatingCoolingState == MODE_OFF
 	var mode []byte
 	switch ctx.Value {
@@ -85,18 +78,13 @@ func (c *OperandsController) TargetHeatingCoolingState(ctx *app.TargetHeatingCoo
 	c.ir.Write(IR_FREQ_DEFAULT, mode)
 	c.status.TargetHeatingCoolingState = ctx.Value
 
-	// OperandsController_TargetHeatingCoolingState: end_implement
-	return nil
+	return ctx.OK(nil)
 }
 
 // TargetRelativeHumidity runs the targetRelativeHumidity action.
 func (c *OperandsController) TargetRelativeHumidity(ctx *app.TargetRelativeHumidityOperandsContext) error {
-	// OperandsController_TargetRelativeHumidity: start_implement
-
-	// Put your logic here
 	fmt.Println("not implment")
 
-	// OperandsController_TargetRelativeHumidity: end_implement
 	return nil
 }
 
