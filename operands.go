@@ -101,11 +101,14 @@ func (c *OperandsController) TargetRelativeHumidity(ctx *app.TargetRelativeHumid
 
 // TargetTemperature runs the targetTemperature action.
 func (c *OperandsController) TargetTemperature(ctx *app.TargetTemperatureOperandsContext) error {
-	// OperandsController_TargetTemperature: start_implement
+	ct := c.status.TargetTemperature
+	tt := ctx.Status.TargetTemperature
 
-	// Put your logic here
-	// TODO: change target AC temperature
+	for index := tt - ct {
+		c.ir.Write(IR_FREQ_DEFAULT, temp_up())
+	}
 
-	// OperandsController_TargetTemperature: end_implement
-	return nil
+	c.status.TargetTemperature = ctx.Status.TargetTemperature
+
+	return ctx.OK(nil)
 }
