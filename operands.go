@@ -4,6 +4,7 @@ import (
 	"github.com/goadesign/goa"
 	"github.com/yuu/thermostat/app"
 	"fmt"
+	"math"
 )
 
 const (
@@ -36,9 +37,6 @@ func NewOperandsController(service *goa.Service, s Status, i IR) *OperandsContro
 
 // Status runs the status action.
 func (c *OperandsController) Status(ctx *app.StatusOperandsContext) error {
-	// OperandsController_Status: start_implement
-
-	// Put your logic here
 	res := &app.JSON{
 		CurrentHeatingCoolingState: c.status.CurrentHeatingCoolingState,
 		CurrentRelativeHumidity:    c.status.CurrentRelativeHumidity,
@@ -48,15 +46,11 @@ func (c *OperandsController) Status(ctx *app.StatusOperandsContext) error {
 		TargetTemperature:          c.status.TargetTemperature,
 	}
 
-	// OperandsController_Status: end_implement
 	return ctx.OK(res)
 }
 
 // TargetHeatingCoolingState runs the targetHeatingCoolingState action.
 func (c *OperandsController) TargetHeatingCoolingState(ctx *app.TargetHeatingCoolingStateOperandsContext) error {
-	// OperandsController_TargetHeatingCoolingState: start_implement
-
-	// Put your logic here
 	var need_boot bool = c.status.CurrentHeatingCoolingState == MODE_OFF
 	var mode []byte
 	switch ctx.Value {
@@ -84,28 +78,37 @@ func (c *OperandsController) TargetHeatingCoolingState(ctx *app.TargetHeatingCoo
 	c.ir.Write(IR_FREQ_DEFAULT, mode)
 	c.status.TargetHeatingCoolingState = ctx.Value
 
-	// OperandsController_TargetHeatingCoolingState: end_implement
-	return nil
+	return ctx.OK(nil)
 }
 
 // TargetRelativeHumidity runs the targetRelativeHumidity action.
 func (c *OperandsController) TargetRelativeHumidity(ctx *app.TargetRelativeHumidityOperandsContext) error {
-	// OperandsController_TargetRelativeHumidity: start_implement
-
-	// Put your logic here
 	fmt.Println("not implment")
 
-	// OperandsController_TargetRelativeHumidity: end_implement
 	return nil
 }
 
 // TargetTemperature runs the targetTemperature action.
 func (c *OperandsController) TargetTemperature(ctx *app.TargetTemperatureOperandsContext) error {
-	// OperandsController_TargetTemperature: start_implement
+	current := c.status.TargetTemperature
+	future  := ctx.Value
+	numbers := int(math.Abs(float64(future - current)))
 
-	// Put your logic here
-	// TODO: change target AC temperature
+	var data []byte
+	if current < future {
+		data, _ = temp_upBytes()
+	}
 
-	// OperandsController_TargetTemperature: end_implement
-	return nil
+	if current > future {
+		data, _ = temp_downBytes()
+	}
+
+	for index := 0; index <= numbers; index++ {
+		c.ir.Write(IR_FREQ_DEFAULT, data)
+	}
+
+	c.status.TargetTemperature = ctx.Value
+	c.status.CurrentTemperature = ctx.Value
+
+	return ctx.OK(nil)
 }
