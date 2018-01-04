@@ -4,6 +4,7 @@ import (
 	"github.com/goadesign/goa"
 	"github.com/yuu/thermostat/app"
 	"fmt"
+	"math"
 )
 
 const (
@@ -101,14 +102,24 @@ func (c *OperandsController) TargetRelativeHumidity(ctx *app.TargetRelativeHumid
 
 // TargetTemperature runs the targetTemperature action.
 func (c *OperandsController) TargetTemperature(ctx *app.TargetTemperatureOperandsContext) error {
-	ct := c.status.TargetTemperature
-	tt := ctx.Status.TargetTemperature
+	current := c.status.TargetTemperature
+	future  := ctx.Value
+	numbers := int(math.Abs(float64(future - current)))
 
-	for index := tt - ct {
-		c.ir.Write(IR_FREQ_DEFAULT, temp_up())
+	var data []byte
+	if current < future {
+		data, _ = temp_upBytes()
 	}
 
-	c.status.TargetTemperature = ctx.Status.TargetTemperature
+	if current > future {
+		data, _ = temp_downBytes()
+	}
+
+	for index := 0; index <= numbers; index++ {
+		c.ir.Write(IR_FREQ_DEFAULT, data)
+	}
+
+	c.status.TargetTemperature = ctx.Value
 
 	return ctx.OK(nil)
 }
