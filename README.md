@@ -4,4 +4,4 @@ Implement [homebridge-thermostat](https://github.com/PJCzx/homebridge-thermostat
 ## feature
 - [X] TargetHeatingcoolingstate
 - [ ] TargetRelativehumidity
-- [ ] TargetTemperature
+- [X] TargetTemperature

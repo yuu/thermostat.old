@@ -108,6 +108,7 @@ func (c *OperandsController) TargetTemperature(ctx *app.TargetTemperatureOperand
 	}
 
 	c.status.TargetTemperature = ctx.Value
+	c.status.CurrentTemperature = ctx.Value
 
 	return ctx.OK(nil)
 }
